@@ -1,20 +1,52 @@
-let firstCard = 10
-let secondCard = 4
-let cards = [firstCard,secondCard ] //array - ordered list of item
-let sum = firstCard + secondCard
+// let firstCard = getRandomCard()
+// let secondCard = getRandomCard()
+let cards = [] //array - ordered list of item
+let sum = 0
 let hasBlackJack = false
-let isAlive = true
+let isAlive = false
 let messege = " "
 let messegeEl = document.getElementById("messege-el")
 let sumEl = document.querySelector("#sum-el")
 let cardsEL = document.querySelector("#cards-el")
+let player={
+    name: "Per",
+    chips:145
+} 
+let playerEl = document.getElementById("player-el")
+playerEl.textContent = player.name+": $"+player.chips
+console.log(cards)
+function getRandomCard(){
+    let a = Math.floor(Math.random()*13)+1
+    if (a === 1){
+        return 11
+    } else if ( a >10){
+        return 10
+    }
+    else{
+        return a
+    }
+}
+console.log(getRandomCard())
 
+// console.log(cards)
 function startGame(){
+    isAlive = true
+    let firstCard = Math.floor(Math.random()*6+1)
+    let secondCard = Math.floor(Math.random()*6+1)
+    cards = [firstCard,secondCard]
+    // let card = cards.push(a)&cards.push(b)
+    sum = firstCard+secondCard
+    console.log(cards)
     renderGame()
 }
+// console.log(startGame())
 
 function renderGame(){
-    cardsEL.textContent = "Cards:"+" "+cards[0]+" "+cards[1]
+    cardsEL.textContent = "Cards:"+" "
+    for (let i = 0; i < cards.length; i++){
+        cardsEL.textContent += cards[i]+ " "
+    }
+
     sumEl.textContent = "Sum:"+" "+sum
 
     if (sum <= 20){
@@ -30,29 +62,16 @@ function renderGame(){
     }
     messegeEl.textContent = messege
 }
-
 function newCard(){
-    let card = 7
+    if(isAlive === true && hasBlackJack === false){
+        let card = getRandomCard()
     sum += card
+    cards.push(card)
+    console.log(cards)
     renderGame()
     console.log("Drawing a new card from the deck!")
 }
+    }
+    
 
-// console.log(isAlive)
-// console.log(hasBlackJack)
-// let person = 22
-// if (person <= 20){
-//     console.log("You are not able to enter the club")
-// }
-// else {
-//     con
-// let age = 99
-// if (age < 100){
-//     console.log("Not eligible.")
-// }
-// else if (age === 100){
-//     console.log("Here is your card from the King.")
-// }
-// else{
-//     console.log("You have already got it.")
-// }
+
